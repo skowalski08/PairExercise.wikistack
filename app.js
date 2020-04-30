@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const layout = require('./views/layout')
+const { db } = require('./models')
 
 const app = express()
 
@@ -15,6 +16,11 @@ app.get('/', async (req, res, next) => {
     next()
     console.log(error)
   }
+})
+
+db.authenticate().
+then(() => {
+  console.log('connected to the database');
 })
 
 const PORT = 3000;
